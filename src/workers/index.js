@@ -4,7 +4,7 @@ import loaderUtils from 'loader-utils';
 
 const getWorker = (plugin, file, content, options) => {
   const publicPath = options.publicPath
-    ? loaderUtils.stringifyRequest(plugin, options.publicPath)
+    ? JSON.stringify(options.publicPath)
     : '__webpack_public_path__';
 
   const publicWorkerPath = `${publicPath} + ${loaderUtils.stringifyRequest(
