@@ -97,6 +97,7 @@ export function pitch(request) {
       worker.file = entries[0].files[0];
 
       worker.factory = getWorker(
+        this,
         worker.file,
         compilation.assets[worker.file].source(),
         options

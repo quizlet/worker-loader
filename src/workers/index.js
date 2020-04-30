@@ -1,15 +1,20 @@
 /* eslint-disable multiline-ternary */
 import path from 'path';
+import loaderUtils from 'loader-utils';
 
-const getWorker = (file, content, options) => {
+const getWorker = (plugin, file, content, options) => {
   const publicPath = options.publicPath
-    ? JSON.stringify(options.publicPath)
+    ? loaderUtils.stringifyRequest(plugin, options.publicPath)
     : '__webpack_public_path__';
 
-  const publicWorkerPath = `${publicPath} + ${JSON.stringify(file)}`;
+  const publicWorkerPath = `${publicPath} + ${loaderUtils.stringifyRequest(
+    plugin,
+    file
+  )}`;
 
   if (options.inline) {
-    const InlineWorkerPath = JSON.stringify(
+    const InlineWorkerPath = loaderUtils.stringifyRequest(
+      plugin,
       `!!${path.join(__dirname, 'InlineWorker.js')}`
     );
 
